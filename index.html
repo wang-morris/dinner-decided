@@ -5,16 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AJAX Project</title>
   <link rel="icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;500;700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oooh+Baby&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
   </header>
   <main>
+    <div class="container">
+      <div class="row">
+        <div class="column-full">
+          <div class="nav-bar"></div>
+          <div class="logo">
+            <img class="burger" src="https://cdn-icons-png.flaticon.com/512/1161/1161695.png" alt="burger image">
+            <img class="bread" src="https://cdn-icons-png.flaticon.com/512/2565/2565434.png" alt="bread image">
+            <img class="rice" src="https://cdn-icons-png.flaticon.com/512/501/501846.png" alt="rice bowl image">
+            <h2>dinner <b>decided</b></h2>
+            <img class="tomato" src="https://cdn-icons-png.flaticon.com/512/1413/1413626.png" alt="tomato image">
+            <img class="carrot" src="https://cdn-icons-png.flaticon.com/512/883/883801.png" alt="carrot image">
+            <img class="ham" src="https://cdn-icons-png.flaticon.com/512/3076/3076067.png" alt="ham image">
+          </div>
+          <div class="menu-bar">
+            <a class="header-links" href="">Featured</a>
+            <a class="header-links" href="">Favorites</a>
+            <input type="text" placeholder="search by main ingredient">
+            <button class="search-button">Search</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-full">
+          <h1>Recipe of The Day</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-half">
+          <img class="recipe-img" src="https://cdn-icons-png.flaticon.com/512/4671/4671171.png" alt="image placeholder">
+          <h4>Meal Name</h4>
+        </div>
+        <div class="column-half">
+          <div class="recipe-container">
+            <div class="toggler">
+              <button class="recipe-button active">Ingredients</button>
+              <button class="recipe-button">Directions</button>
+            </div>
+            <textarea cols="30" rows="7"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-full favorite-button">
+          <button class="add-favorite">Add recipe to favorites</button>
+        </div>
+      </div>
+    </div>
   </main>
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
+  <script src="data.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
