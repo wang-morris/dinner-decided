@@ -1,0 +1,272 @@
+* {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(232, 232, 232);
+}
+
+.main-footer-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: calc(100vh - [height of your header]);
+}
+
+.page-wrapper {
+  flex: 1;
+  background-color: rgb(232, 232, 232);
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  position: relative;
+  bottom: -1px;
+}
+
+.logo-banner {
+  background-color: #82c671;
+  margin-left: calc(-50vw + 50%);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.header-container {
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
+}
+
+h2 {
+  color: white;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+b {
+  font-weight: 700;
+}
+
+.menu-bar {
+  height: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-items {
+  color: white;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.9rem;
+  position: relative;
+  top: 0.3rem;
+  margin-right: 16px;
+}
+
+#search {
+  height: 2rem;
+  border-radius: 0.25rem;
+  border-style: none;
+  font-size: 0.8rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.search-button {
+  border-radius: 0.25rem;
+  border-style: solid;
+  border-color: white;
+  color: white;
+  background-color: #82c671;
+}
+
+/* body */
+
+h1 {
+  font-family: "Oooh Baby", cursive;
+  text-align: center;
+}
+
+.img-container {
+  position: relative;
+  bottom: 1.5rem;
+}
+
+.recipe-img {
+  width: 23rem;
+  height: 18rem;
+  margin-bottom: -2rem;
+  object-fit: contain;
+  display: block;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.meal-column-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 18rem;
+}
+
+h4 {
+  text-align: center;
+}
+
+.recipe-container {
+  background-color: white;
+  width: 20rem;
+  height: 17rem;
+  border: 1px solid lightgrey;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+.recipe-button {
+  border-style: none;
+  background-color: white;
+}
+
+.active {
+  background-color: rgb(226, 247, 226);
+  padding: 0.2rem 0.7rem;
+  border-radius: 5rem;
+  border: 1px solid #82c671;
+}
+
+.toggler {
+  width: 15rem;
+  position: relative;
+  top: 1.2rem;
+  left: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.ingredients-textarea,
+.about-container {
+  margin-top: 1rem;
+  padding-left: 0.8rem;
+  width: 90%;
+  height: 75%;
+  box-sizing: border-box;
+}
+
+.about-link {
+  margin-top: 1rem;
+}
+
+textarea {
+  padding: 0.5rem;
+  position: relative;
+  top: 0.4rem;
+  left: 0.5rem;
+  overflow: scroll;
+  border: none;
+}
+
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.favorite-button {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.add-favorite {
+  height: 2rem;
+  border-radius: 1rem;
+  border-style: none;
+  color: white;
+  background-color: #58af22;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.7rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* footer */
+.footer-row {
+  background-color: white;
+}
+
+.footer {
+  width: 20rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  margin: 0;
+}
+
+.footer-symbol {
+  width: 2rem;
+}
+
+.footer-links {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  border: none;
+  background-color: white;
+}
+
+.about-container {
+  font-size: 0.8rem;
+  padding: 1rem 0.5rem;
+  text-align: center;
+}
+
+.calories {
+  font-weight: 600;
+}
+
+.nutrients-container {
+  margin-top: 0.8rem;
+  font-size: 1rem;
+}
+
+.nutrients {
+  font-weight: 600;
+}
+
+@media screen and (max-width: 767px) {
+  .header-container {
+    flex-direction: column;
+  }
+
+  .menu-bar {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .header-items {
+    margin-bottom: 1rem;
+  }
+
+  .footer {
+    flex-wrap: wrap;
+  }
+}
