@@ -14,58 +14,80 @@
   <link href="https://fonts.googleapis.com/css2?family=Oooh+Baby&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-  </header>
-  <main>
-    <div class="container">
-      <div class="row">
-        <div class="column-full">
-          <div class="nav-bar"></div>
-          <div class="logo">
-            <img class="burger" src="https://cdn-icons-png.flaticon.com/512/1161/1161695.png" alt="burger image">
-            <img class="bread" src="https://cdn-icons-png.flaticon.com/512/2565/2565434.png" alt="bread image">
-            <img class="rice" src="https://cdn-icons-png.flaticon.com/512/501/501846.png" alt="rice bowl image">
-            <h2>dinner <b>decided</b></h2>
-            <img class="tomato" src="https://cdn-icons-png.flaticon.com/512/1413/1413626.png" alt="tomato image">
-            <img class="carrot" src="https://cdn-icons-png.flaticon.com/512/883/883801.png" alt="carrot image">
-            <img class="ham" src="https://cdn-icons-png.flaticon.com/512/3076/3076067.png" alt="ham image">
-          </div>
-          <div class="menu-bar">
-            <a class="header-links" href="">Featured</a>
-            <a class="header-links" href="">Favorites</a>
-            <input type="text" placeholder="search by main ingredient">
-            <button class="search-button">Search</button>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="column-full">
-          <h1>Recipe of The Day</h1>
-        </div>
-      </div>
-      <div class="row">
-        <div class="column-half">
-          <img class="recipe-img" src="https://cdn-icons-png.flaticon.com/512/4671/4671171.png" alt="image placeholder">
-          <h4>Meal Name</h4>
-        </div>
-        <div class="column-half">
-          <div class="recipe-container">
-            <div class="toggler">
-              <button class="recipe-button active">Ingredients</button>
-              <button class="recipe-button">Directions</button>
+  <div class="page-wrapper">
+    <header>
+    </header>
+    <div class="main-footer-wrapper">
+      <main>
+        <div class="container">
+          <div class="row logo-banner">
+            <div class="header-container">
+              <div class="column-half logo">
+                <h2>dinner <b>decided</b></h2>
+              </div>
+              <div class="column-half menu-column">
+                <div class="menu-bar">
+                  <a class="header-items featured-link" href="">Featured</a>
+                  <a class="header-items favorite-link" href="">Favorites</a>
+                  <input class="header-items" id="search" type="text" placeholder="search by main ingredient">
+                  <button class="header-items search-button">Search</button>
+                </div>
+              </div>
             </div>
-            <textarea cols="30" rows="7"></textarea>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <h1>Recipe of The Day</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-half meal-column-section img-container">
+              <img class="recipe-img" src="https://cdn-icons-png.flaticon.com/512/4671/4671171.png"
+                alt="image placeholder">
+              <h4 class="meal-name">Meal Name</h4>
+            </div>
+            <div class="column-half meal-column-section">
+              <div class="recipe-container">
+                <div class="toggler">
+                  <button class="recipe-button active">Ingredients</button>
+                  <button class="recipe-button">About</button>
+                </div>
+                <textarea class="ingredients-textarea" readonly></textarea>
+                <div class="about-container" style="display: none;">
+                  <p id="about-link"></p>
+                </div>
+                <p class="about-link"></p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full favorite-button">
+              <button class="add-favorite">Add recipe to favorites</button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="column-full favorite-button">
-          <button class="add-favorite">Add recipe to favorites</button>
+      </main>
+      <div class="row footer-row">
+        <div class="column-full footer">
+          <a class="footer-links" href="">
+            <img class="footer-symbol" src="https://cdn-icons-png.flaticon.com/512/3341/3341539.png"
+              alt="featured meal image of fork and knife">
+            Featured
+          </a>
+          <a class="footer-links" href="">
+            <img class="footer-symbol" src="https://cdn-icons-png.flaticon.com/512/2902/2902475.png"
+              alt="star symbol for favorites">
+            Favorites
+          </a>
+          <button class="footer-links">
+            <img class="footer-symbol" src="https://cdn-icons-png.flaticon.com/512/3106/3106797.png">
+            Search
+          </button>
         </div>
       </div>
     </div>
-  </main>
-  <script src="data.js"></script>
-  <script src="main.js"></script>
+  </div>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
