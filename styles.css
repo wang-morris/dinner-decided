@@ -204,8 +204,27 @@ textarea::-webkit-scrollbar {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.favorites-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.favorite-items-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - [height of your header] - [height of your footer]);
+}
+
+.favorite-items-container .row {
+  margin-bottom: 3rem;
+}
+
 /* footer */
 .footer-row {
+  margin-top: auto;
   background-color: white;
 }
 
