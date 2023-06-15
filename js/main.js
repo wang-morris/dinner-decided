@@ -36,6 +36,8 @@ function updateTextArea(display, ingredientsText, aboutText, calories, nutrients
 
 var currentRecipe = null;
 
+// fetching data for featured recipe
+
 function getRecipeData(query, display) {
   var xhr = new XMLHttpRequest();
   xhr.open(
@@ -77,6 +79,8 @@ function getRecipeData(query, display) {
   });
   xhr.send();
 }
+
+// adding to featured recipe to favorites
 
 var addToFavorites = document.querySelector('.add-favorite');
 
@@ -135,6 +139,7 @@ for (var i = 0; i < favoritesLinks.length; i++) {
     event.preventDefault();
     homePage.style.display = 'none';
     favoritesPage.style.display = 'block';
+    searchPage.style.display = 'none';
   });
 }
 
@@ -146,6 +151,8 @@ function updateNoFavoritesMessage() {
     noFavoritesMessage.style.display = 'none';
   }
 }
+
+// creating and appending elements to the favorites page
 
 function appendFavoriteItem(favoriteItem) {
   var favoriteRow = document.createElement('div');
@@ -226,11 +233,6 @@ function appendFavoriteItem(favoriteItem) {
   recipeContainer.appendChild(ingredientsTextarea);
   recipeContainer.appendChild(aboutContainer);
 
-  aboutContainer.appendChild(ingredientsInfo);
-  aboutContainer.appendChild(aboutLink);
-  aboutContainer.appendChild(caloriesElement);
-  aboutContainer.appendChild(nutrientsElement);
-
   mealColumnSection.appendChild(recipeImg);
   mealColumnSection.appendChild(mealName);
   recipeColumnSection.appendChild(recipeContainer);
@@ -264,3 +266,26 @@ function appendFavoriteItem(favoriteItem) {
 var favoriteItemsJSON = localStorage.getItem('favoriteItems') || '[]';
 var favoriteItems = JSON.parse(favoriteItemsJSON);
 favoriteItems.forEach(appendFavoriteItem);
+
+//  search feature starts here
+var searchPage = document.createElement('div');
+searchPage.className = 'search-page';
+searchPage.style.display = 'none';
+var searchBanner = document.querySelector('.green-heading');
+searchBanner.appendChild(searchPage);
+var searchPageTitle = document.createElement('h1');
+searchPageTitle.textContent = 'Search Results';
+searchPage.appendChild(searchPageTitle);
+
+var searchResultsContainer = document.createElement('div');
+searchResultsContainer.className = 'search-results-container';
+searchPage.appendChild(searchResultsContainer);
+
+// reference to the search button
+var searchButton = document.querySelector('.search-icon');
+searchButton.addEventListener('click', function (event) {
+  event.preventDefault();
+  homePage.style.display = 'none';
+  favoritesPage.style.display = 'none';
+  searchPage.style.display = 'block';
+});

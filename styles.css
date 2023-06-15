@@ -222,6 +222,12 @@ textarea::-webkit-scrollbar {
   margin-bottom: 3rem;
 }
 
+.search-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 /* footer */
 .footer-row {
   margin-top: auto;
