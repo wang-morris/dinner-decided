@@ -223,9 +223,36 @@ textarea::-webkit-scrollbar {
 }
 
 .search-page {
+  padding: 10px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-header-items {
+  box-sizing: border-box;
+  width: 65vw;
+  padding: 1.1rem;
+}
+
+.header-items.search-feature-button {
+  background-color: grey;
+  color: #fff;
+  width: 20vw;
+  height: 2rem;
+  border: none;
+  border-radius: 0.3rem;
+  margin-top: 0.3rem;
+}
+
+.search-button:hover {
+  background-color: #58af22;
 }
 
 /* footer */

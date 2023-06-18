@@ -240,7 +240,7 @@ function appendFavoriteItem(favoriteItem) {
   favoriteRow.appendChild(mealColumnSection);
   favoriteRow.appendChild(recipeColumnSection);
 
-  favoriteItemsContainer.appendChild(favoriteRow);
+  favoriteItemsContainer.insertBefore(favoriteRow, favoriteItemsContainer.firstChild);
   updateNoFavoritesMessage();
   document.getElementById('no-favorites').style.display = 'none';
 
@@ -265,23 +265,39 @@ function appendFavoriteItem(favoriteItem) {
 
 var favoriteItemsJSON = localStorage.getItem('favoriteItems') || '[]';
 var favoriteItems = JSON.parse(favoriteItemsJSON);
-favoriteItems.forEach(appendFavoriteItem);
+favoriteItems.reverse().forEach(appendFavoriteItem);
 
-//  search feature starts here
+// search page rendering
 var searchPage = document.createElement('div');
 searchPage.className = 'search-page';
 searchPage.style.display = 'none';
+
 var searchBanner = document.querySelector('.green-heading');
 searchBanner.appendChild(searchPage);
-var searchPageTitle = document.createElement('h1');
-searchPageTitle.textContent = 'Search Results';
-searchPage.appendChild(searchPageTitle);
+
+var searchContainer = document.createElement('div');
+searchContainer.className = 'search-container';
+
+var searchInput = document.createElement('input');
+searchInput.className = 'search-header-items';
+searchInput.id = 'search';
+searchInput.type = 'text';
+searchInput.placeholder = 'search by main ingredient';
+searchInput.style.display = 'block';
+
+var mobileSearchButton = document.createElement('button');
+mobileSearchButton.className = 'header-items search-feature-button';
+mobileSearchButton.textContent = 'Search';
+mobileSearchButton.style.display = 'block';
+
+searchContainer.appendChild(searchInput);
+searchContainer.appendChild(mobileSearchButton);
+searchPage.appendChild(searchContainer);
 
 var searchResultsContainer = document.createElement('div');
 searchResultsContainer.className = 'search-results-container';
 searchPage.appendChild(searchResultsContainer);
 
-// reference to the search button
 var searchButton = document.querySelector('.search-icon');
 searchButton.addEventListener('click', function (event) {
   event.preventDefault();
@@ -289,3 +305,5 @@ searchButton.addEventListener('click', function (event) {
   favoritesPage.style.display = 'none';
   searchPage.style.display = 'block';
 });
+
+// search by ingredient feature
