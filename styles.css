@@ -20,7 +20,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: calc(100vh - [height of your header]);
 }
 
 .page-wrapper {
@@ -215,7 +214,6 @@ textarea::-webkit-scrollbar {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - [height of your header] - [height of your footer]);
 }
 
 .favorite-items-container .row {
@@ -224,7 +222,6 @@ textarea::-webkit-scrollbar {
 
 .search-page {
   padding: 10px;
-  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -232,33 +229,47 @@ textarea::-webkit-scrollbar {
 .search-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .search-header-items {
   box-sizing: border-box;
-  width: 65vw;
+  width: 20rem;
   padding: 1.1rem;
 }
 
 .header-items.search-feature-button {
   background-color: grey;
   color: #fff;
-  width: 20vw;
+  width: 10rem;
   height: 2rem;
   border: none;
   border-radius: 0.3rem;
   margin-top: 0.3rem;
+  margin-left: 1rem;
 }
 
 .search-button:hover {
   background-color: #58af22;
 }
 
+.search-results-container {
+  margin-top: 2rem;
+  flex: 1;
+}
+
+.search-results-container .row {
+  margin-top: 3rem;
+}
+
 /* footer */
 .footer-row {
   margin-top: auto;
   background-color: white;
+}
+
+.no-results {
+  height: 100vh;
 }
 
 .footer {
@@ -304,7 +315,7 @@ textarea::-webkit-scrollbar {
   font-weight: 600;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 750px) {
   .header-container {
     flex-direction: column;
   }
@@ -320,5 +331,17 @@ textarea::-webkit-scrollbar {
 
   .footer {
     flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .header-items.search-feature-button {
+    background-color: grey;
+    color: #fff;
+    width: 20vw;
+    height: 2rem;
+    border: none;
+    border-radius: 0.3rem;
+    margin-bottom: 0.7rem;
   }
 }

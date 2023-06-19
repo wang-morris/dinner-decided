@@ -304,6 +304,148 @@ searchButton.addEventListener('click', function (event) {
   homePage.style.display = 'none';
   favoritesPage.style.display = 'none';
   searchPage.style.display = 'block';
+  searchResultsContainer.classList.add('no-results');
+
 });
 
-// search by ingredient feature
+// search function starts here
+function appendSearchItem(searchItem, parentContainer) {
+  var searchRow = document.createElement('div');
+  searchRow.className = 'row';
+
+  var mealColumnSection = document.createElement('div');
+  mealColumnSection.className = 'column-half meal-column-section img-container';
+
+  var mealName = document.createElement('h4');
+  mealName.className = 'meal-name';
+  mealName.textContent = searchItem.mealName;
+
+  var recipeImg = document.createElement('img');
+  recipeImg.className = 'recipe-img';
+  recipeImg.src = searchItem.recipeImg;
+
+  var recipeColumnSection = document.createElement('div');
+  recipeColumnSection.className = 'column-half meal-column-section';
+
+  var recipeContainer = document.createElement('div');
+  recipeContainer.className = 'recipe-container';
+
+  var ingredientsTextarea = document.createElement('textarea');
+  ingredientsTextarea.className = 'ingredients-textarea';
+  ingredientsTextarea.readOnly = true;
+  ingredientsTextarea.value = searchItem.ingredients;
+
+  var aboutContainer = document.createElement('div');
+  aboutContainer.className = 'about-container';
+  aboutContainer.style.display = 'none';
+  aboutContainer.innerHTML = `
+  <span>For full recipe directions, please <a href="${searchItem.aboutHref}" target="_blank">click here</a></span><br>
+  <br>
+  <div class='nutrients-container'>
+    <strong class='calories'>Calories:</strong> ${Math.round(searchItem.calories)}<br>
+    ${Object.keys(searchItem.nutrients).map(nutrient => `<span class="nutrients">${nutrient}:</span> ${parseFloat(searchItem.nutrients[nutrient]).toFixed(1)}g`).join('<br>')}
+  </div>
+`;
+
+  var toggler = document.createElement('div');
+  toggler.className = 'toggler';
+
+  var ingredientsButton = document.createElement('button');
+  ingredientsButton.className = 'recipe-button active';
+  ingredientsButton.textContent = 'Ingredients';
+
+  var aboutButton = document.createElement('button');
+  aboutButton.className = 'recipe-button';
+  aboutButton.textContent = 'About';
+
+  toggler.appendChild(ingredientsButton);
+  toggler.appendChild(aboutButton);
+
+  recipeContainer.appendChild(toggler);
+  recipeContainer.appendChild(ingredientsTextarea);
+  recipeContainer.appendChild(aboutContainer);
+
+  mealColumnSection.appendChild(recipeImg);
+  mealColumnSection.appendChild(mealName);
+  recipeColumnSection.appendChild(recipeContainer);
+
+  searchRow.appendChild(mealColumnSection);
+  searchRow.appendChild(recipeColumnSection);
+
+  parentContainer.insertBefore(searchRow, parentContainer.firstChild);
+
+  function updateSearchActiveButton(button1, button2) {
+    button1.classList.add('active');
+    button2.classList.remove('active');
+  }
+
+  ingredientsButton.addEventListener('click', function () {
+    updateSearchActiveButton(ingredientsButton, aboutButton);
+    ingredientsTextarea.style.display = 'block';
+    aboutContainer.style.display = 'none';
+  });
+
+  aboutButton.addEventListener('click', function () {
+    updateSearchActiveButton(aboutButton, ingredientsButton);
+    ingredientsTextarea.style.display = 'none';
+    aboutContainer.style.display = 'block';
+  });
+}
+
+function searchRecipeData(query) {
+  var xhr = new XMLHttpRequest();
+  xhr.open(
+    'GET',
+    `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=cfff0803&app_key=e81eff927b70d1b43add769f0adfa4e5`
+  );
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    var results = xhr.response.hits;
+
+    if (results.length > 0) {
+      searchResultsContainer.classList.remove('no-results'); // Remove .no-results class if there are search results
+    }
+
+    for (let i = 0; i < results.length; i++) {
+      var result = results[i].recipe;
+
+      var mealName = result.label;
+      var imageURL = result.image;
+      var ingredients = result.ingredientLines;
+      var ingredientsText = ingredients.join('\n');
+      var about = result.url;
+      var aboutText = about;
+      var calories = result.calories;
+      var nutrients = {
+        Protein: result.totalNutrients.PROCNT.quantity,
+        Fat: result.totalNutrients.FAT.quantity,
+        Carbohydrates: result.totalNutrients.CHOCDF.quantity
+      };
+
+      var currentRecipe = {
+        mealName,
+        recipeImg: imageURL,
+        ingredients: ingredientsText,
+        aboutText,
+        aboutHref: aboutText,
+        calories,
+        nutrients
+      };
+
+      appendSearchItem(currentRecipe, searchResultsContainer);
+    }
+  });
+  xhr.send();
+}
+
+mobileSearchButton.addEventListener('click', function (event) {
+  event.preventDefault();
+  var ingredient = searchInput.value;
+
+  if (ingredient === '') {
+    alert('Please enter a main ingredient');
+    return;
+  }
+  searchRecipeData(ingredient);
+  searchInput.value = '';
+});
