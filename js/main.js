@@ -37,7 +37,6 @@ function updateTextArea(display, ingredientsText, aboutText, calories, nutrients
 var currentRecipe = null;
 
 // fetching data for featured recipe
-
 function getRecipeData(query, display) {
   var xhr = new XMLHttpRequest();
   xhr.open(
@@ -81,20 +80,7 @@ function getRecipeData(query, display) {
 }
 
 // adding to featured recipe to favorites
-
 var addToFavorites = document.querySelector('.add-favorite');
-
-addToFavorites.addEventListener('click', function () {
-  if (!currentRecipe) return;
-
-  var favoriteItemsJSON = localStorage.getItem('favoriteItems') || '[]';
-  var favoriteItems = JSON.parse(favoriteItemsJSON);
-  favoriteItems.push(currentRecipe);
-  localStorage.setItem('favoriteItems', JSON.stringify(favoriteItems));
-
-  appendFavoriteItem(currentRecipe);
-  updateNoFavoritesMessage();
-});
 
 window.addEventListener('load', event => {
   getRecipeData('chicken', 'ingredients');
@@ -140,6 +126,7 @@ for (var i = 0; i < favoritesLinks.length; i++) {
     homePage.style.display = 'none';
     favoritesPage.style.display = 'block';
     searchPage.style.display = 'none';
+    favoritesPage.scrollTop = 0;
   });
 }
 
@@ -153,8 +140,9 @@ function updateNoFavoritesMessage() {
 }
 
 // creating and appending elements to the favorites page
-
 function appendFavoriteItem(favoriteItem) {
+  var favoriteItemsContainer = document.querySelector('.favorite-items-container');
+
   var favoriteRow = document.createElement('div');
   favoriteRow.className = 'row';
 
@@ -240,7 +228,7 @@ function appendFavoriteItem(favoriteItem) {
   favoriteRow.appendChild(mealColumnSection);
   favoriteRow.appendChild(recipeColumnSection);
 
-  favoriteItemsContainer.insertBefore(favoriteRow, favoriteItemsContainer.firstChild);
+  favoriteItemsContainer.appendChild(favoriteRow);
   updateNoFavoritesMessage();
   document.getElementById('no-favorites').style.display = 'none';
 
@@ -263,9 +251,30 @@ function appendFavoriteItem(favoriteItem) {
   });
 }
 
-var favoriteItemsJSON = localStorage.getItem('favoriteItems') || '[]';
-var favoriteItems = JSON.parse(favoriteItemsJSON);
-favoriteItems.reverse().forEach(appendFavoriteItem);
+// local storage
+function saveFavorites(favoriteItems) {
+  localStorage.setItem('favoriteItems', JSON.stringify(favoriteItems.reverse()));
+}
+
+function getFavorites() {
+  const favoriteItemsJSON = localStorage.getItem('favoriteItems') || '[]';
+  return JSON.parse(favoriteItemsJSON).reverse();
+}
+
+addToFavorites.addEventListener('click', function () {
+  favoriteItemsContainer.scrollTop = 0;
+  if (!currentRecipe) return;
+
+  const favoriteItems = getFavorites();
+  favoriteItems.unshift(currentRecipe);
+  saveFavorites(favoriteItems);
+
+  appendFavoriteItem(currentRecipe);
+  updateNoFavoritesMessage();
+});
+
+const favoriteItems = getFavorites();
+favoriteItems.forEach(appendFavoriteItem);
 
 // search page rendering
 var searchPage = document.createElement('div');
@@ -282,7 +291,7 @@ var searchInput = document.createElement('input');
 searchInput.className = 'search-header-items';
 searchInput.id = 'search';
 searchInput.type = 'text';
-searchInput.placeholder = 'search by main ingredient';
+searchInput.placeholder = 'search by desired ingredients!';
 searchInput.style.display = 'block';
 
 var mobileSearchButton = document.createElement('button');
@@ -300,18 +309,21 @@ searchPage.appendChild(searchResultsContainer);
 
 var searchButton = document.querySelector('.search-icon');
 searchButton.addEventListener('click', function (event) {
+  searchPage.scrollTop = 0;
   event.preventDefault();
   homePage.style.display = 'none';
   favoritesPage.style.display = 'none';
   searchPage.style.display = 'block';
   searchResultsContainer.classList.add('no-results');
-
+  setTimeout(function () {
+    window.scrollTo(0, favoritesPage.offsetTop);
+  }, 100);
 });
 
 // search function starts here
 function appendSearchItem(searchItem, parentContainer) {
   var searchRow = document.createElement('div');
-  searchRow.className = 'row';
+  searchRow.className = 'row search-favorite';
 
   var mealColumnSection = document.createElement('div');
   mealColumnSection.className = 'column-half meal-column-section img-container';
@@ -372,6 +384,22 @@ function appendSearchItem(searchItem, parentContainer) {
   searchRow.appendChild(mealColumnSection);
   searchRow.appendChild(recipeColumnSection);
 
+  var addToFavoritesButton = document.createElement('button');
+  addToFavoritesButton.className = 'add-favorite';
+  addToFavoritesButton.textContent = 'Add recipe to favorites';
+
+  addToFavoritesButton.addEventListener('click', function () {
+    var favoriteItemsJSON = localStorage.getItem('favoriteItems') || '[]';
+    var favoriteItems = JSON.parse(favoriteItemsJSON);
+    favoriteItems.push(searchItem);
+    localStorage.setItem('favoriteItems', JSON.stringify(favoriteItems));
+
+    appendFavoriteItem(searchItem);
+    updateNoFavoritesMessage();
+  });
+
+  searchRow.appendChild(addToFavoritesButton);
+
   parentContainer.insertBefore(searchRow, parentContainer.firstChild);
 
   function updateSearchActiveButton(button1, button2) {
@@ -403,7 +431,7 @@ function searchRecipeData(query) {
     var results = xhr.response.hits;
 
     if (results.length > 0) {
-      searchResultsContainer.classList.remove('no-results'); // Remove .no-results class if there are search results
+      searchResultsContainer.classList.remove('no-results');
     }
 
     for (let i = 0; i < results.length; i++) {
@@ -443,9 +471,62 @@ mobileSearchButton.addEventListener('click', function (event) {
   var ingredient = searchInput.value;
 
   if (ingredient === '') {
-    alert('Please enter a main ingredient');
+    alert('Please enter at least one ingredient');
     return;
   }
   searchRecipeData(ingredient);
   searchInput.value = '';
 });
+
+var mobileSearchInput = document.querySelector('.search-header-items');
+mobileSearchInput.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    performSearch();
+  }
+});
+
+var headerSearchInput = document.getElementById('search');
+headerSearchInput.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    performSearch();
+  }
+});
+
+var desktopSearchButton = document.querySelector('.search-button');
+desktopSearchButton.addEventListener('click', function () {
+  performSearch();
+});
+
+function performSearch() {
+  var searchInput = document.getElementById('search');
+  var mobileSearchInput = document.querySelector('.search-header-items');
+  var searchTerm = searchInput.value.trim();
+  var ingredient = searchInput.value;
+  var mobileSearchTerm = mobileSearchInput.value.trim();
+  var mobileIngredient = mobileSearchInput.value;
+
+  if (ingredient === '' && mobileIngredient === '') {
+    alert('Please enter at least one ingredient');
+    return;
+  }
+
+  if (searchTerm !== '') {
+    searchRecipeData(searchTerm, 'ingredients');
+    searchInput.value = '';
+    mobileSearchInput.value = '';
+  }
+
+  if (mobileSearchTerm !== '') {
+    searchRecipeData(mobileSearchTerm, 'ingredients');
+    mobileSearchInput.value = '';
+  }
+  searchPage.scrollTop = 0;
+  event.preventDefault();
+  homePage.style.display = 'none';
+  favoritesPage.style.display = 'none';
+  searchPage.style.display = 'block';
+  searchResultsContainer.classList.add('no-results');
+  setTimeout(function () {
+    window.scrollTo(0, favoritesPage.offsetTop);
+  }, 100);
+}
