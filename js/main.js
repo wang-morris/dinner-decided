@@ -530,3 +530,18 @@ function performSearch() {
     window.scrollTo(0, favoritesPage.offsetTop);
   }, 100);
 }
+
+var title = document.querySelector('h2');
+title.addEventListener('click', function () {
+  showHomePage();
+});
+
+function showHomePage() {
+  homePage.style.display = 'block';
+  favoritesPage.style.display = 'none';
+  searchPage.style.display = 'none';
+  searchResultsContainer.innerHTML = '';
+  searchResultsContainer.classList.add('no-results');
+  searchInput.value = '';
+  searchPage.scrollTop = 0;
+}

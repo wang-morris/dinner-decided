@@ -60,6 +60,10 @@ h2 {
   font-size: 1.5rem;
 }
 
+h2:hover {
+  cursor: pointer;
+}
+
 b {
   font-weight: 700;
 }
