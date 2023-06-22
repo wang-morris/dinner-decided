@@ -20,7 +20,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: calc(100vh - [height of your header]);
 }
 
 .page-wrapper {
@@ -61,6 +60,10 @@ h2 {
   font-size: 1.5rem;
 }
 
+h2:hover {
+  cursor: pointer;
+}
+
 b {
   font-weight: 700;
 }
@@ -83,6 +86,7 @@ b {
 }
 
 #search {
+  color: black;
   height: 2rem;
   border-radius: 0.25rem;
   border-style: none;
@@ -130,6 +134,8 @@ h1 {
 
 h4 {
   text-align: center;
+  font-size: 0.95rem;
+  font-weight: 400;
 }
 
 .recipe-container {
@@ -215,17 +221,67 @@ textarea::-webkit-scrollbar {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - [height of your header] - [height of your footer]);
 }
 
 .favorite-items-container .row {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+
+.search-page {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-header-items {
+  box-sizing: border-box;
+  width: 20rem;
+  padding: 1.1rem;
+}
+
+.header-items.search-feature-button {
+  background-color: grey;
+  color: #fff;
+  width: 10rem;
+  height: 2rem;
+  border: none;
+  border-radius: 0.3rem;
+  margin-top: 0.3rem;
+  margin-left: 1rem;
+}
+
+.search-button:hover {
+  background-color: #58af22;
+}
+
+.search-results-container {
+  margin-top: 2rem;
+  flex: 1;
+}
+
+.search-results-container .row {
+  margin-top: 4rem;
+}
+
+.search-favorite {
+  display: flex;
+  justify-content: center;
 }
 
 /* footer */
 .footer-row {
   margin-top: auto;
   background-color: white;
+}
+
+.no-results {
+  height: 100vh;
 }
 
 .footer {
@@ -271,7 +327,7 @@ textarea::-webkit-scrollbar {
   font-weight: 600;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 750px) {
   .header-container {
     flex-direction: column;
   }
@@ -287,5 +343,21 @@ textarea::-webkit-scrollbar {
 
   .footer {
     flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .header-items.search-feature-button {
+    background-color: grey;
+    color: #fff;
+    width: 20vw;
+    height: 2rem;
+    border: none;
+    border-radius: 0.3rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .search-container {
+    display: none;
   }
 }
