@@ -213,7 +213,7 @@ textarea::-webkit-scrollbar {
 .favorites-page {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  flex: 1;
 }
 
 .favorite-items-container {
@@ -231,6 +231,7 @@ textarea::-webkit-scrollbar {
   padding: 10px;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .search-container {
@@ -334,7 +335,10 @@ textarea::-webkit-scrollbar {
 
 /* footer */
 .footer-row {
-  margin-top: auto;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   background-color: white;
 }
 
