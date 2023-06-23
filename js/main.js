@@ -309,6 +309,7 @@ searchPage.appendChild(searchResultsContainer);
 
 var searchButton = document.querySelector('.search-icon');
 searchButton.addEventListener('click', function (event) {
+  loadingSymbol.style.display = 'none';
   searchPage.scrollTop = 0;
   event.preventDefault();
   homePage.style.display = 'none';
@@ -498,6 +499,9 @@ desktopSearchButton.addEventListener('click', function () {
 });
 
 function performSearch() {
+  loadingSymbol.style.display = 'block';
+  checkConnection();
+
   var searchInput = document.getElementById('search');
   var mobileSearchInput = document.querySelector('.search-header-items');
   var searchTerm = searchInput.value.trim();
@@ -544,4 +548,41 @@ function showHomePage() {
   searchResultsContainer.classList.add('no-results');
   searchInput.value = '';
   searchPage.scrollTop = 0;
+}
+
+// connectivity and loading data indicators
+var loadingContainer = document.createElement('div');
+loadingContainer.className = 'loading-container';
+searchPage.appendChild(loadingContainer);
+
+var loadingSymbol = document.createElement('div');
+loadingSymbol.className = 'loading';
+loadingSymbol.innerHTML = `
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+`;
+
+loadingContainer.appendChild(loadingSymbol);
+
+var errorMessageContainer = null;
+
+function checkConnection() {
+  if (!navigator.onLine) {
+    if (!errorMessageContainer) {
+      loadingSymbol.style.display = 'none';
+      errorMessageContainer = document.createElement('div');
+      var errorMessage = document.createElement('div');
+      errorMessage.className = 'connection-error';
+      errorMessage.textContent = 'Sorry, there was an error connecting to the network! Please check your internet connection.';
+      errorMessageContainer.appendChild(errorMessage);
+      searchPage.appendChild(errorMessageContainer);
+    }
+  } else {
+    if (errorMessageContainer) {
+      searchPage.removeChild(errorMessageContainer);
+      errorMessageContainer = null;
+    }
+  }
 }
