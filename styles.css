@@ -274,6 +274,64 @@ textarea::-webkit-scrollbar {
   justify-content: center;
 }
 
+.loading-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  bottom: 50rem;
+  right: 1rem;
+}
+
+.loading {
+  display: none;
+  position: relative;
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.loading div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid rgb(98, 99, 100);
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: rgb(126, 125, 125) transparent transparent;
+}
+
+.loading div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.loading div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.loading div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.connection-error {
+  color: rgb(236, 44, 44);
+  font-weight: bold;
+  position: relative;
+  bottom: 52rem;
+  text-align: center;
+}
+
 /* footer */
 .footer-row {
   margin-top: auto;
@@ -327,7 +385,7 @@ textarea::-webkit-scrollbar {
   font-weight: 600;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 768px) {
   .header-container {
     flex-direction: column;
   }
@@ -346,7 +404,7 @@ textarea::-webkit-scrollbar {
   }
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 768px) {
   .header-items.search-feature-button {
     background-color: grey;
     color: #fff;
