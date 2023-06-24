@@ -463,6 +463,7 @@ function searchRecipeData(query) {
 
       appendSearchItem(currentRecipe, searchResultsContainer);
     }
+    loadingSymbol.style.display = 'none';
   });
   xhr.send();
 }
@@ -553,7 +554,7 @@ function showHomePage() {
 // connectivity and loading data indicators
 var loadingContainer = document.createElement('div');
 loadingContainer.className = 'loading-container';
-searchPage.appendChild(loadingContainer);
+searchPage.prepend(loadingContainer);
 
 var loadingSymbol = document.createElement('div');
 loadingSymbol.className = 'loading';
@@ -577,7 +578,7 @@ function checkConnection() {
       errorMessage.className = 'connection-error';
       errorMessage.textContent = 'Sorry, there was an error connecting to the network! Please check your internet connection.';
       errorMessageContainer.appendChild(errorMessage);
-      searchPage.appendChild(errorMessageContainer);
+      searchPage.prepend(errorMessageContainer);
     }
   } else {
     if (errorMessageContainer) {
