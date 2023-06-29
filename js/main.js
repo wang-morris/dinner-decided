@@ -130,6 +130,20 @@ for (var i = 0; i < favoritesLinks.length; i++) {
   });
 }
 
+var favoritesIcon = document.querySelector('.favorites-icon');
+favoritesIcon.addEventListener('click', function (event) {
+  loadingSymbol.style.display = 'none';
+  searchPage.scrollTop = 0;
+  event.preventDefault();
+  homePage.style.display = 'none';
+  favoritesPage.style.display = 'block';
+  searchPage.style.display = 'none';
+  searchResultsContainer.classList.add('no-results');
+  setTimeout(function () {
+    window.scrollTo(0, favoritesPage.offsetTop);
+  }, 100);
+});
+
 function updateNoFavoritesMessage() {
   var favoriteItems = favoriteItemsContainer.querySelectorAll('.row');
   if (favoriteItems.length === 0) {
