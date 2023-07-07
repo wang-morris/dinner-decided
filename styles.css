@@ -17,16 +17,45 @@ body {
   overflow: hidden;
 }
 
-.main-footer-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+h1 {
+  font-family: "Oooh Baby", cursive;
+  text-align: center;
 }
 
-.page-wrapper {
-  height: 100vh;
-  overflow-y: scroll;
+h2 {
+  color: white;
+  font-weight: 300;
+  font-size: 1.5rem;
 }
+
+h2:hover {
+  cursor: pointer;
+}
+
+h4 {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+b {
+  font-weight: 700;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  position: relative;
+  bottom: -1px;
+}
+
+/* hidden scrollbar */
 
 .page-wrapper::-webkit-scrollbar {
   width: 0;
@@ -49,18 +78,7 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-a:hover {
-  cursor: pointer;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
-button:active {
-  position: relative;
-  bottom: -1px;
-}
+/* header */
 
 .logo-banner {
   background-color: #82c671;
@@ -74,20 +92,6 @@ button:active {
   max-width: 800px;
   display: flex;
   justify-content: center;
-}
-
-h2 {
-  color: white;
-  font-weight: 300;
-  font-size: 1.5rem;
-}
-
-h2:hover {
-  cursor: pointer;
-}
-
-b {
-  font-weight: 700;
 }
 
 .menu-bar {
@@ -125,16 +129,11 @@ b {
   background-color: #82c671;
 }
 
-/* body */
-
-h1 {
-  font-family: "Oooh Baby", cursive;
-  text-align: center;
-}
+/* recipe body */
 
 .img-container {
   position: relative;
-  bottom: 1.5rem;
+  bottom: 1rem;
 }
 
 .recipe-img {
@@ -152,12 +151,6 @@ h1 {
   flex-direction: column;
   align-items: center;
   height: 18rem;
-}
-
-h4 {
-  text-align: center;
-  font-size: 0.95rem;
-  font-weight: 400;
 }
 
 .recipe-container {
@@ -189,6 +182,25 @@ h4 {
   justify-content: space-around;
 }
 
+.about-container {
+  font-size: 0.8rem;
+  padding: 1rem 0.5rem;
+  text-align: center;
+}
+
+.calories {
+  font-weight: 600;
+}
+
+.nutrients-container {
+  margin-top: 0.8rem;
+  font-size: 1rem;
+}
+
+.nutrients {
+  font-weight: 600;
+}
+
 .ingredients-textarea,
 .about-container {
   margin-top: 1rem;
@@ -215,6 +227,8 @@ textarea::-webkit-scrollbar {
   display: none;
 }
 
+/* favorites and search feature */
+
 .favorite-button {
   display: flex;
   justify-content: center;
@@ -232,39 +246,7 @@ textarea::-webkit-scrollbar {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.favorites-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin-bottom: 4rem;
-}
-
-.favorite-items-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.favorite-items-container .row {
-  margin-bottom: 2rem;
-}
-
-.search-page {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 4rem;
-}
-
-.search-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .search-header-items {
-  box-sizing: border-box;
   width: 20rem;
   padding: 1.1rem;
 }
@@ -297,6 +279,8 @@ textarea::-webkit-scrollbar {
   display: flex;
   justify-content: center;
 }
+
+/* loading and connection status */
 
 .loading-container {
   display: flex;
@@ -392,56 +376,9 @@ textarea::-webkit-scrollbar {
   background-color: white;
 }
 
-.about-container {
-  font-size: 0.8rem;
-  padding: 1rem 0.5rem;
-  text-align: center;
-}
-
-.calories {
-  font-weight: 600;
-}
-
-.nutrients-container {
-  margin-top: 0.8rem;
-  font-size: 1rem;
-}
-
-.nutrients {
-  font-weight: 600;
-}
-
 @media screen and (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-  }
-
-  .menu-bar {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .header-items {
-    margin-bottom: 1rem;
-  }
-
-  .footer {
-    flex-wrap: wrap;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .header-items.search-feature-button {
-    background-color: grey;
-    color: #fff;
-    width: 20vw;
-    height: 2rem;
-    border: none;
-    border-radius: 0.3rem;
-    margin-bottom: 0.7rem;
-  }
-
-  .search-container {
-    display: none;
+  .img-container {
+    position: relative;
+    bottom: 1.8rem;
   }
 }

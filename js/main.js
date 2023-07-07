@@ -1,7 +1,6 @@
-var $ingredientsTextArea = document.querySelector('.ingredients-textarea');
-var $aboutContainer = document.querySelector('.about-container');
-var $imagePlaceholder = document.querySelector('.recipe-img');
-var $mealName = document.querySelector('.meal-name');
+var ingredientsTextArea = document.querySelector('.ingredients-textarea');
+var aboutContainer = document.querySelector('.about-container');
+var imagePlaceholder = document.querySelector('.recipe-img');
 
 var ingredientsButton = document.querySelector('.recipe-container .recipe-button:nth-child(1)');
 var aboutButton = document.querySelector('.recipe-container .recipe-button:nth-child(2)');
@@ -13,13 +12,13 @@ function updateTextArea(display, ingredientsText, aboutText, calories, nutrients
   nutrients.Carbohydrates = nutrients.Carbohydrates || 0;
 
   if (display === 'about') {
-    $ingredientsTextArea.style.display = 'none';
-    $aboutContainer.style.display = 'block';
-    $aboutContainer.setAttribute('data-calories', calories.toFixed(0));
-    $aboutContainer.setAttribute('data-protein', nutrients.Protein.toFixed(1));
-    $aboutContainer.setAttribute('data-fat', nutrients.Fat.toFixed(1));
-    $aboutContainer.setAttribute('data-carbohydrates', nutrients.Carbohydrates.toFixed(1));
-    $aboutContainer.innerHTML = `
+    ingredientsTextArea.style.display = 'none';
+    aboutContainer.style.display = 'block';
+    aboutContainer.setAttribute('data-calories', calories.toFixed(0));
+    aboutContainer.setAttribute('data-protein', nutrients.Protein.toFixed(1));
+    aboutContainer.setAttribute('data-fat', nutrients.Fat.toFixed(1));
+    aboutContainer.setAttribute('data-carbohydrates', nutrients.Carbohydrates.toFixed(1));
+    aboutContainer.innerHTML = `
       <span>For full recipe directions, please <a href="${aboutText}" target="_blank">click here</a></span><br>
       <br>
       <div class='nutrients-container'>
@@ -28,9 +27,9 @@ function updateTextArea(display, ingredientsText, aboutText, calories, nutrients
       </div
     `;
   } else {
-    $ingredientsTextArea.style.display = 'block';
-    $aboutContainer.style.display = 'none';
-    $ingredientsTextArea.value = ingredientsText;
+    ingredientsTextArea.style.display = 'block';
+    aboutContainer.style.display = 'none';
+    ingredientsTextArea.value = ingredientsText;
   }
 }
 
@@ -73,8 +72,8 @@ function getRecipeData(query, display) {
 
     updateTextArea(display, ingredientsText, aboutText, calories, nutrients);
 
-    $mealName.textContent = mealName;
-    $imagePlaceholder.src = imageURL;
+    mealName.textContent = mealName;
+    imagePlaceholder.src = imageURL;
   });
   xhr.send();
 }
@@ -129,6 +128,20 @@ for (var i = 0; i < favoritesLinks.length; i++) {
     favoritesPage.scrollTop = 0;
   });
 }
+
+var favoritesIcon = document.querySelector('.favorites-icon');
+favoritesIcon.addEventListener('click', function (event) {
+  loadingSymbol.style.display = 'none';
+  searchPage.scrollTop = 0;
+  event.preventDefault();
+  homePage.style.display = 'none';
+  favoritesPage.style.display = 'block';
+  searchPage.style.display = 'none';
+  searchResultsContainer.classList.add('no-results');
+  setTimeout(function () {
+    window.scrollTo(0, favoritesPage.offsetTop);
+  }, 100);
+});
 
 function updateNoFavoritesMessage() {
   var favoriteItems = favoriteItemsContainer.querySelectorAll('.row');
@@ -251,7 +264,7 @@ function appendFavoriteItem(favoriteItem) {
   });
 }
 
-// local storage
+// local storage for adding to favorites
 function saveFavorites(favoriteItems) {
   localStorage.setItem('favoriteItems', JSON.stringify(favoriteItems.reverse()));
 }
@@ -321,7 +334,7 @@ searchButton.addEventListener('click', function (event) {
   }, 100);
 });
 
-// search function starts here
+// searching for recipes
 function appendSearchItem(searchItem, parentContainer) {
   var searchRow = document.createElement('div');
   searchRow.className = 'row search-favorite';
