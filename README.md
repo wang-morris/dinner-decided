@@ -8,7 +8,7 @@ This application solves the problem of leftover ingredients and meal indecisiven
 
 ## Live Demo
 
-Try the application live at [https://wang-morris.github.io/ajax-project/]
+Try the application live at [https://wang-morris.github.io/dinner-decided/]
 
 ## Technologies Used
 
