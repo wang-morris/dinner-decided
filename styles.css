@@ -4,15 +4,7 @@
   box-sizing: border-box;
 }
 
-html,
 body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   background-color: rgb(232, 232, 232);
   overflow: hidden;
 }
@@ -82,23 +74,6 @@ button:active {
 
 .logo-banner {
   background-color: #82c671;
-  margin-left: calc(-50vw + 50%);
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-}
-
-.header-container {
-  max-width: 800px;
-  display: flex;
-  justify-content: center;
-}
-
-.menu-bar {
-  height: 4.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .header-items {
@@ -106,9 +81,6 @@ button:active {
   text-decoration: none;
   font-weight: 400;
   font-size: 0.9rem;
-  position: relative;
-  top: 0.3rem;
-  margin-right: 16px;
 }
 
 #search {
@@ -117,8 +89,6 @@ button:active {
   border-radius: 0.25rem;
   border-style: none;
   font-size: 0.8rem;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
 }
 
 .search-button {
@@ -131,26 +101,10 @@ button:active {
 
 /* recipe body */
 
-.img-container {
-  position: relative;
-  bottom: 1rem;
-}
-
 .recipe-img {
-  width: 23rem;
-  height: 18rem;
-  margin-bottom: -2rem;
   object-fit: contain;
   display: block;
-  padding: 1rem;
   border-radius: 1rem;
-}
-
-.meal-column-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 18rem;
 }
 
 .recipe-container {
@@ -173,15 +127,6 @@ button:active {
   border: 1px solid #82c671;
 }
 
-.toggler {
-  width: 15rem;
-  position: relative;
-  top: 1.2rem;
-  left: 2rem;
-  display: flex;
-  justify-content: space-around;
-}
-
 .about-container {
   font-size: 0.8rem;
   padding: 1rem 0.5rem;
@@ -193,7 +138,6 @@ button:active {
 }
 
 .nutrients-container {
-  margin-top: 0.8rem;
   font-size: 1rem;
 }
 
@@ -201,24 +145,7 @@ button:active {
   font-weight: 600;
 }
 
-.ingredients-textarea,
-.about-container {
-  margin-top: 1rem;
-  padding-left: 0.8rem;
-  width: 90%;
-  height: 75%;
-  box-sizing: border-box;
-}
-
-.about-link {
-  margin-top: 1rem;
-}
-
 textarea {
-  padding: 0.5rem;
-  position: relative;
-  top: 0.4rem;
-  left: 0.5rem;
   overflow: scroll;
   border: none;
 }
@@ -228,12 +155,6 @@ textarea::-webkit-scrollbar {
 }
 
 /* favorites and search feature */
-
-.favorite-button {
-  display: flex;
-  justify-content: center;
-  padding: 1rem;
-}
 
 .add-favorite {
   height: 2rem;
@@ -246,53 +167,29 @@ textarea::-webkit-scrollbar {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.search-header-items {
-  width: 20rem;
-  padding: 1.1rem;
-}
-
 .header-items.search-feature-button {
   background-color: grey;
   color: #fff;
-  width: 10rem;
-  height: 2rem;
   border: none;
   border-radius: 0.3rem;
-  margin-top: 0.3rem;
-  margin-left: 1rem;
 }
 
 .search-button:hover {
   background-color: #58af22;
 }
 
-.search-results-container {
-  margin-top: 2rem;
-  flex: 1;
-}
-
-.search-results-container .row {
-  margin-top: 4rem;
-}
-
-.search-favorite {
-  display: flex;
-  justify-content: center;
+.added-message {
+  font-size: 0.9rem;
+  border-radius: 0.3rem;
+  background-color: #58af22;
+  color: white;
+  display: none;
 }
 
 /* loading and connection status */
 
-.loading-container {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  top: 4rem;
-  right: 2rem;
-}
-
 .loading {
   display: none;
-  position: relative;
   width: 0.8rem;
   height: 0.8rem;
 }
@@ -336,49 +233,18 @@ textarea::-webkit-scrollbar {
   color: rgb(236, 44, 44);
   font-weight: bold;
   position: relative;
-  text-align: center;
 }
 
 /* footer */
+
 .footer-row {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
   background-color: white;
-}
-
-.no-results {
-  height: 100vh;
-}
-
-.footer {
-  width: 20rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 4rem;
-  margin: 0;
-}
-
-.footer-symbol {
-  width: 2rem;
 }
 
 .footer-links {
   text-decoration: none;
   color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   font-size: 0.8rem;
   border: none;
   background-color: white;
-}
-
-@media screen and (max-width: 768px) {
-  .img-container {
-    position: relative;
-    bottom: 1.8rem;
-  }
 }
