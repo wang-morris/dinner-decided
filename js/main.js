@@ -1,6 +1,7 @@
 var ingredientsTextArea = document.querySelector('.ingredients-textarea');
 var aboutContainer = document.querySelector('.about-container');
 var imagePlaceholder = document.querySelector('.recipe-img');
+var featuredMealName = document.querySelector('.meal-name');
 
 var ingredientsButton = document.querySelector('.recipe-container .recipe-button:nth-child(1)');
 var aboutButton = document.querySelector('.recipe-container .recipe-button:nth-child(2)');
@@ -72,7 +73,7 @@ function getRecipeData(query, display) {
 
     updateTextArea(display, ingredientsText, aboutText, calories, nutrients);
 
-    mealName.textContent = mealName;
+    featuredMealName.textContent = mealName;
     imagePlaceholder.src = imageURL;
   });
   xhr.send();
@@ -264,7 +265,7 @@ function appendFavoriteItem(favoriteItem) {
   });
 }
 
-// local storage for adding to favorites
+// local storage and add to favorites message
 function saveFavorites(favoriteItems) {
   localStorage.setItem('favoriteItems', JSON.stringify(favoriteItems.reverse()));
 }
@@ -274,16 +275,44 @@ function getFavorites() {
   return JSON.parse(favoriteItemsJSON).reverse();
 }
 
+var addedMessage = document.createElement('div');
+addedMessage.className = 'added-message';
+document.body.appendChild(addedMessage);
+
 addToFavorites.addEventListener('click', function () {
   favoriteItemsContainer.scrollTop = 0;
   if (!currentRecipe) return;
 
   const favoriteItems = getFavorites();
-  favoriteItems.unshift(currentRecipe);
-  saveFavorites(favoriteItems);
+  var isAlreadyFavorite = favoriteItems.some(function (item) {
+    return item.mealName === currentRecipe.mealName;
+  });
 
-  appendFavoriteItem(currentRecipe);
-  updateNoFavoritesMessage();
+  if (!isAlreadyFavorite) {
+    favoriteItems.unshift(currentRecipe);
+    saveFavorites(favoriteItems);
+
+    appendFavoriteItem(currentRecipe);
+    updateNoFavoritesMessage();
+
+    addedMessage.textContent = 'Added to favorites!';
+    addedMessage.style.display = 'block';
+
+    setTimeout(function () {
+      addedMessage.style.display = 'none';
+    }, 1000);
+  } else {
+    var alreadyAdded = document.createElement('div');
+    alreadyAdded.className = 'added-message';
+    alreadyAdded.textContent = 'Item is already added to favorites!';
+
+    document.body.appendChild(alreadyAdded);
+    alreadyAdded.style.display = 'block';
+
+    setTimeout(function () {
+      alreadyAdded.style.display = 'none';
+    }, 1000);
+  }
 });
 
 const favoriteItems = getFavorites();
@@ -405,11 +434,37 @@ function appendSearchItem(searchItem, parentContainer) {
   addToFavoritesButton.addEventListener('click', function () {
     var favoriteItemsJSON = localStorage.getItem('favoriteItems') || '[]';
     var favoriteItems = JSON.parse(favoriteItemsJSON);
-    favoriteItems.push(searchItem);
-    localStorage.setItem('favoriteItems', JSON.stringify(favoriteItems));
 
-    appendFavoriteItem(searchItem);
-    updateNoFavoritesMessage();
+    var isAlreadyFavorite = favoriteItems.some(function (item) {
+      return item.mealName === searchItem.mealName;
+    });
+
+    if (!isAlreadyFavorite) {
+      favoriteItems.push(searchItem);
+      localStorage.setItem('favoriteItems', JSON.stringify(favoriteItems));
+
+      appendFavoriteItem(searchItem);
+      updateNoFavoritesMessage();
+
+      var addedMessage = document.querySelector('.added-message');
+      addedMessage.textContent = 'Added to favorites!';
+      addedMessage.style.display = 'block';
+
+      setTimeout(function () {
+        addedMessage.style.display = 'none';
+      }, 1000);
+    } else {
+      var alreadyAdded = document.createElement('div');
+      alreadyAdded.className = 'added-message';
+      alreadyAdded.textContent = 'Item is already added to favorites!';
+
+      document.body.appendChild(alreadyAdded);
+      alreadyAdded.style.display = 'block';
+
+      setTimeout(function () {
+        alreadyAdded.style.display = 'none';
+      }, 1000);
+    }
   });
 
   searchRow.appendChild(addToFavoritesButton);
